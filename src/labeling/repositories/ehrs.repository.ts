@@ -10,6 +10,11 @@ export class EhrsRepository {
         private readonly ehr: Model<Ehr>
     ) {}
 
+    async insertOne(data: Partial<Ehr>): Promise<Ehr> {
+        const ehr = new this.ehr(data);
+        return ehr.save();
+    }
+
     async findNext() : Promise<Ehr> {
         return this.ehr.findOne({ labeled: false });
     }

@@ -1,4 +1,5 @@
-import { Body, Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { CreateEhrRequest } from '../dto/request/create-ehr-request.dto';
 import { EhrResponse } from '../dto/responses/ehr-response.dto';
 import { EhrsService } from '../services/ehrs.service';
 
@@ -8,5 +9,12 @@ export class EhrsController {
     @Get()
     async findNext(): Promise<EhrResponse> {
         return this.ehrsService.findNext();
+    }
+
+    @Post()
+    async createEhr(
+        @Body() CreateEhrRequest: CreateEhrRequest
+    ): Promise<EhrResponse> {
+        return this.ehrsService.createEhr(CreateEhrRequest);
     }
 }
