@@ -1,5 +1,5 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
-import { hash } from 'bcrypt';
+import { Injectable, NotFoundException, UnauthorizedException, UnprocessableEntityException } from '@nestjs/common';
+import { hash, compare } from 'bcrypt';
 import { CreateUserRequest } from './dto/request/create-user-request.dto';
 import { UserResponse } from './dto/response/user-response.dto';
 import { User } from './models/user';
@@ -18,6 +18,20 @@ export class UsersService {
 
         return this.buildResponse(user);
     }
+    
+    async validateUser(email: string, password: string): Promise<UserResponse> {
+        const user = await this.usersRepository.findOneByEmail(email);
+        if (!user) {
+            throw new NotFoundException('User not found.');
+        }
+
+        const passwordIsValid = await compare(password, user.password); 
+        if (!passwordIsValid) {
+            throw new UnauthorizedException('Wrong credentials.');
+        }
+
+        return this.buildResponse(user);
+    } 
 
     private async validateCreateuserRequest(createUserRequest: CreateUserRequest): Promise<void> {
         const user = await this.usersRepository.findOneByEmail(createUserRequest.email);
@@ -26,6 +40,7 @@ export class UsersService {
             throw new UnprocessableEntityException('This email already exists.')
         }
     }
+
 
     private buildResponse(user: User): UserResponse {
         return {
