@@ -4,9 +4,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
-import { LabelingModule } from './labeling/labeling.module';
+import { EhrsModule } from './labeling/ehrs.module';
+import { LabelsModule } from './labels/labels.module';
 
 @Module({
   imports: [
@@ -20,7 +20,8 @@ import { LabelingModule } from './labeling/labeling.module';
     }),
     UsersModule,
     AuthModule,
-    LabelingModule
+    EhrsModule,
+    LabelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

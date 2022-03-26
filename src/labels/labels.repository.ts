@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose"
-import { Label } from '../models/label.model';
+import { Label } from './models/label.model';
 
 @Injectable()
 export class LabelsRepository {

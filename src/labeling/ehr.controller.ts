@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CreateEhrRequest } from '../dto/request/create-ehr-request.dto';
-import { EhrResponse } from '../dto/responses/ehr-response.dto';
-import { EhrsService } from '../services/ehrs.service';
+import { CreateEhrRequest } from './dto/request/create-ehr-request.dto';
+import { EhrResponse } from './dto/responses/ehr-response.dto';
+import { EhrsService } from './ehrs.service';
 
 @Controller('ehrs')
 export class EhrsController {
