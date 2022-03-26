@@ -13,4 +13,8 @@ export class LabelsRepository {
     async findAll() : Promise<Label[]> {
         return this.label.find({});
     }
+
+    async findOne(_id: string) : Promise<Label> {
+        return this.label.findOne({_id});
+    }
 }

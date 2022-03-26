@@ -18,4 +18,8 @@ export class EhrsRepository {
     async findNext() : Promise<Ehr> {
         return this.ehr.findOne({ labeled: false });
     }
+
+    async findOne(_id: string) : Promise<Ehr> {
+        return this.ehr.findOne({_id});
+    }
 }

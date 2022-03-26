@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { DiagnosesModule } from './diagnoses/diagnoses.module';
 import { EhrsModule } from './labeling/ehrs.module';
 import { LabelsModule } from './labels/labels.module';
 
@@ -22,6 +23,7 @@ import { LabelsModule } from './labels/labels.module';
     AuthModule,
     EhrsModule,
     LabelsModule,
+    DiagnosesModule
   ],
   controllers: [AppController],
   providers: [AppService],
