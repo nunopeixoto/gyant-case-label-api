@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserResponse } from 'src/users/dto/response/user-response.dto';
 import { Response } from "express";
 
-interface TokenPayload {
+export interface TokenPayload {
     userId: string;
 
 }
