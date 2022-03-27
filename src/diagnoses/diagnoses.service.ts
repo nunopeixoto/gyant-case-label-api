@@ -5,7 +5,7 @@ import { DiagnosesRepository } from './diagnoses.repository';
 import { Diagnosis } from './models/diagnosis.model';
 import { LabelsRepository } from 'src/labels/labels.repository';
 import { UsersRepository } from 'src/users/users.repository';
-import { EhrsRepository } from 'src/labeling/ehrs.repository';
+import { EhrsRepository } from 'src/ehrs/ehrs.repository';
 import mongoose from 'mongoose';
 import { InjectConnection } from '@nestjs/mongoose';
 

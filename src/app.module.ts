@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { DiagnosesModule } from './diagnoses/diagnoses.module';
-import { EhrsModule } from './labeling/ehrs.module';
+import { EhrsModule } from './ehrs/ehrs.module';
 import { LabelsModule } from './labels/labels.module';
 
 @Module({

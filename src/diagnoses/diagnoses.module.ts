@@ -6,10 +6,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Diagnosis, DiagnosisSchema } from './models/diagnosis.model';
 import { LabelsRepository } from 'src/labels/labels.repository';
 import { UsersRepository } from 'src/users/users.repository';
-import { EhrsRepository } from 'src/labeling/ehrs.repository';
+import { EhrsRepository } from 'src/ehrs/ehrs.repository';
 import { Label, LabelSchema } from '../labels/models/label.model';
 import { User, UserSchema } from 'src/users/models/user';
-import {Ehr, EhrSchema} from '../labeling/models/ehr.model';
+import {Ehr, EhrSchema} from '../ehrs/models/ehr.model';
 
 @Module({
   imports: [
