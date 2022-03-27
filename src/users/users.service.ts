@@ -54,7 +54,8 @@ export class UsersService {
     private buildResponse(user: User): UserResponse {
         return {
             _id: user._id.toHexString(),
-            email: user.email
+            email: user.email,
+            username: user.username
         }
     }
 }
