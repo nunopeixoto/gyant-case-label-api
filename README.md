@@ -1,11 +1,9 @@
-<p align="center">
-  Gyant - Case Label assignment
-</p>
+# GYANT - Case label assignment
 
 ## Overview
-- The project is divided in two repositories:
-  1. [gyant-case-label-api](https://github.com/nunopeixoto/gyant-case-label-api) NestJS w/ TypeScript
-  2. [gyant-case-label-client](https://github.com/nunopeixoto/gyant-case-label-client) React w/ TypeScript
+The project is divided in two repositories:
+  - [gyant-case-label-api](https://github.com/nunopeixoto/gyant-case-label-api) NestJS w/ TypeScript <br>
+  - [gyant-case-label-client](https://github.com/nunopeixoto/gyant-case-label-client) React w/ TypeScript
 
 ## Project setup instructions
 #### gyant-case-label-api
@@ -44,6 +42,7 @@ ___
 - I will provide you a database connection URI to add on the gyant-case-label-api 
 - This already has a signed up user (e-mail: user@test.com password: 123)
 
+___
 
 ## General notes about the assignment
 - I didn't find a way to create a command to seed the database, so I will provide you with a database connection URI so you can connect to an already seeded database (hosted on the cloud). However, if you want to try the projects out in a local database [here are the collections to import](https://www.dropbox.com/scl/fo/xl0c2dajt7pqoew6y9r3k/h?dl=0&rlkey=jdhecuypnqjgu4q6sst3j0o3y)
