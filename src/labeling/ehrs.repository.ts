@@ -22,4 +22,12 @@ export class EhrsRepository {
     async findOne(_id: string) : Promise<Ehr> {
         return this.ehr.findOne({_id});
     }
+
+    async markAsLabeled(_id: string) : Promise<Ehr> {
+        return this.ehr.findOneAndUpdate(
+            {_id}, 
+            {labeled: true},
+            {new: true}
+        );
+    }
 }

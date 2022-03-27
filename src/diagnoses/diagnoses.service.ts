@@ -1,15 +1,14 @@
 import {Injectable, Post, Body, UnprocessableEntityException} from '@nestjs/common';
 import { CreateDiagnosisRequest } from './dto/request/create-diagnosis.dto';
 import {DiagnosisResponse} from './dto/response/diagnosis-response.dto';
-import {hash} from 'bcrypt';
 import { DiagnosesRepository } from './diagnoses.repository';
-import {UserResponse} from '../users/dto/response/user-response.dto';
-import {User} from '../users/models/user';
 import { Diagnosis } from './models/diagnosis.model';
-import {CreateUserRequest} from '../users/dto/request/create-user-request.dto';
 import { LabelsRepository } from 'src/labels/labels.repository';
 import { UsersRepository } from 'src/users/users.repository';
 import { EhrsRepository } from 'src/labeling/ehrs.repository';
+import mongoose from 'mongoose';
+import { InjectConnection } from '@nestjs/mongoose';
+
 
 @Injectable()
 export class DiagnosesService {
@@ -17,14 +16,30 @@ export class DiagnosesService {
     private readonly diagnosesRepository: DiagnosesRepository,
     private readonly labelsRepository: LabelsRepository,
     private readonly usersRepository: UsersRepository,
-    private readonly ehrsRepository: EhrsRepository
+    private readonly ehrsRepository: EhrsRepository,
+    @InjectConnection() private readonly connection: mongoose.Connection
   ) {}
 
   async create(createDiagnosisRequest: CreateDiagnosisRequest) : Promise<DiagnosisResponse> {
+    // Validate
     await this.validateCreateDiagnosisRequest(createDiagnosisRequest);
-      const diagnosis = await this.diagnosesRepository.insertOne(createDiagnosisRequest);
-
-      return this.buildResponse(diagnosis);
+    
+    // Wrap in transaction
+    const session = await this.connection.startSession();
+    session.startTransaction();
+    try {
+      // Create diagnosis
+      var diagnosis = await this.diagnosesRepository.insertOne(createDiagnosisRequest);
+  
+      // Mark ehr as labeled
+      await this.ehrsRepository.markAsLabeled(createDiagnosisRequest.ehrId);
+      await session.commitTransaction();
+    } catch (err) {
+      session.abortTransaction();
+      throw err;
+    }
+    
+    return this.buildResponse(diagnosis);
   }
 
   private async validateCreateDiagnosisRequest(createDiagnosisRequest: CreateDiagnosisRequest): Promise<void> {
